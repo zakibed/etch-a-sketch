@@ -1,17 +1,24 @@
 const sketchDisplay = document.querySelector('.container-display');
 const gridRange = document.querySelector('#grid-range');
-let gridValue = gridRange.value;
 
-function setGridSize() {
+gridRange.value = 16;
+createGrid(Math.pow(gridRange.value, 2));
+
+function outputRange() {
     document.querySelectorAll('.grid-value').forEach(val => {
-        val.textContent = gridValue;
+        val.textContent = this.value;
     });
-
-    setTimeout(() => window.location.reload(), 200);
 }
 
-function createGrid() {
-    for (let i = 0; i < Math.pow(gridRange.value, 2); i++) {
+function setGridSize() {
+    const gridSize = Math.pow(gridRange.value, 2);
+
+    sketchDisplay.innerHTML = '';
+    createGrid(gridSize);
+}
+
+function createGrid(size) {
+    for (let i = 0; i < size; i++) {
         const div = document.createElement('div');
         div.className = 'grid-box';
 
@@ -23,8 +30,6 @@ function createGrid() {
         box.style.height = `calc(100% / ${gridRange.value})`;
     });
 }
-
-createGrid();
 
 // let gridDivAmount = Math.pow(gridRange.value, 2);
 
@@ -47,9 +52,8 @@ sketchDisplay.addEventListener('mousedown', () => {
     });
 })
 
-
-
-gridRange.addEventListener('input', setGridSize);
+gridRange.addEventListener('input', outputRange);
+gridRange.addEventListener('click', setGridSize);
 
 
     
