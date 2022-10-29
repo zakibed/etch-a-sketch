@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+
+:root {
+    --border-width: 1px;
+    --display-wh: 336px;
+}
+
+.container-display {
+    width: 700px;
+    height: 700px;
+    font-size: 20px;
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid gray;
+}
+
+.container-display > div {
+    /* width: calc(100% / 20); */
+    /* height: calc(100% / 20); */
+    flex-shrink: 1;
+    border: var(--border-width) solid gray;
+    background-color: white;
+    transition: all 30ms linear;
+}
