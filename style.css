@@ -9,10 +9,14 @@
     --display-wh: 336px;
 }
 
+iframe {
+    border: 1px solid gray;
+    overflow: hidden;
+}
+
 .container-display {
     width: 700px;
     height: 700px;
-    font-size: 20px;
     color: white;
     display: flex;
     flex-wrap: wrap;
