@@ -1,8 +1,8 @@
 const sketchDisplay = document.querySelector('.container-display');
-const gridRange = document.querySelector('#grid-range');
+const range = document.querySelector('#grid-range');
 
-gridRange.value = 16;
-createGrid(Math.pow(gridRange.value, 2));
+range.value = 16;
+createGrid(Math.pow(range.value, 2));
 
 function outputRange() {
     document.querySelectorAll('.grid-value').forEach(val => {
@@ -11,49 +11,34 @@ function outputRange() {
 }
 
 function setGridSize() {
-    const gridSize = Math.pow(gridRange.value, 2);
-
     sketchDisplay.innerHTML = '';
-    createGrid(gridSize);
+    createGrid();
 }
 
-function createGrid(size) {
-    for (let i = 0; i < size; i++) {
+function createGrid() {
+    const gridSize = Math.pow(range.value, 2);
+
+    for (let i = 0; i < gridSize; i++) {
         const div = document.createElement('div');
         div.className = 'grid-box';
 
         sketchDisplay.appendChild(div);
     }
 
-    document.querySelectorAll('.grid-box').forEach(box => {
-        box.style.width = `calc(100% / ${gridRange.value})`;
-        box.style.height = `calc(100% / ${gridRange.value})`;
-    });
+    sketchDisplay.style.gridTemplate = `repeat(${range.value}, 1fr) / 
+                                        repeat(${range.value}, 1fr)`;
 }
 
-// let gridDivAmount = Math.pow(gridRange.value, 2);
-
-// for (let i = 0; i < gridDivAmount; i++) {
-//     sketchDisplay.innerHTML += '<div></div>';
-// }
-
-// const grids = document.querySelectorAll('.container-display > div');
-
-// grids.forEach(grid => {
-//     grid.style.width = `calc(100% / ${gridRange.value})`;
-//     grid.style.height = `calc(100% / ${gridRange.value})`;
-// });
-
 sketchDisplay.addEventListener('mousedown', () => {
-    document.querySelectorAll('.container-display > div').forEach(box => {
+    document.querySelectorAll('.grid-box').forEach(box => {
         box.addEventListener('mouseover', function () {
             this.style.background = 'gray';
         });
     });
-})
+});
 
-gridRange.addEventListener('input', outputRange);
-gridRange.addEventListener('click', setGridSize);
+range.addEventListener('input', outputRange);
+range.addEventListener('click', setGridSize);
 
 
     
