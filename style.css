@@ -4,18 +4,18 @@
     padding:0;
 }
 
+:root {
+    --gray: #aaaaaa;
+}
+
 .container-display {
     width: 700px;
     height: 700px;
-    color: white;
-    background: red;
     display: grid;
-    border: 2px solid gray;
+    border: 2px solid var(--gray);
 }
 
 .container-display > div {
-    border: 1px solid gray;
-    background-color: white;
-    transition: all 30ms linear;
+    border: 1px solid var(--gray);
+    transition: all 20ms linear;
 }
-

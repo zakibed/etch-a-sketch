@@ -8,9 +8,13 @@
         <script src="script.js" defer></script>
     </head>
     <body>
-        <div class="preferences">
+        <div id="preferences">
             <p><span class="grid-value">16</span>x<span class="grid-value">16</span></p>
-            <input type="range" min="16" max="64" id="grid-range">
+            <input type="range" min="16" max="64" id="grid-range" value="16">
+            <div id="color">
+                <label for="color-picker">Choose a color:</label>
+                <input type="color" id="color-picker" value="#aaaaaa">
+            </div>
         </div>
         <div class="container-display"></div>
     </body>

@@ -1,8 +1,7 @@
 const sketchDisplay = document.querySelector('.container-display');
 const range = document.querySelector('#grid-range');
+const color = document.querySelector('#color-picker');
 
-range.value = 16;
-createGrid(Math.pow(range.value, 2));
 
 function outputRange() {
     document.querySelectorAll('.grid-value').forEach(val => {
@@ -29,17 +28,21 @@ function createGrid() {
                                         repeat(${range.value}, 1fr)`;
 }
 
+range.value = 16;
+color.value = '#aaaaaa';
+createGrid();
+
 sketchDisplay.addEventListener('mousedown', () => {
     document.querySelectorAll('.grid-box').forEach(box => {
         box.addEventListener('mouseover', function () {
-            this.style.background = 'gray';
+            this.style.background = color.value;
+            this.style.borderColor = color.value;
         });
     });
 });
 
 range.addEventListener('input', outputRange);
 range.addEventListener('click', setGridSize);
-
 
     
 
