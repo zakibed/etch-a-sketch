@@ -3,6 +3,8 @@ const range = document.querySelector('#grid-range');
 const color = document.querySelector('#color-picker');
 const defaultBtn = document.querySelector('#default-btn');
 const randomBtn = document.querySelector('#random-btn');
+const clearBtn = document.querySelector('#clear-btn');
+const eraser = document.querySelector('#eraser-btn');
 
 let colorMode = true;
 
@@ -25,14 +27,18 @@ function setGridSize () {
 
 function showMode() {
     const toggleOn = 'color: white; background: green;';
-    const toggleOff = 'color: black; background: white;'
+    const toggleOff = 'color: black; background: white;';
 
-    if (colorMode === true) {
-        defaultBtn.style.cssText = toggleOn;
-        randomBtn.style.cssText = toggleOff;
-    } else {
-        randomBtn.style.cssText = toggleOn;
+    defaultBtn.style.cssText = toggleOff;
+    randomBtn.style.cssText = toggleOff;
+    eraser.style.cssText = toggleOff;
+
+    if (colorMode === true) defaultBtn.style.cssText = toggleOn;
+    if (colorMode === false) randomBtn.style.cssText = toggleOn;
+
+    if (typeof colorMode !== 'boolean') {
         defaultBtn.style.cssText = toggleOff;
+        eraser.style.cssText = 'color: white; background: red';
     }
 }
 
@@ -75,6 +81,14 @@ function toggleColorMode() {
             });
         });
 
+    } else {
+
+        gridBoxes.forEach(box => {
+            box.addEventListener('mouseover', function () {
+                this.style.cssText = 'background: white; border-color: var(--gray);'; 
+            });
+        });
+
     }
 }
 
@@ -85,12 +99,24 @@ sketchDisplay.addEventListener('mousedown', () => {
     this.addEventListener('mouseover', toggleColorMode);
 });
 
-randomBtn.addEventListener('mousedown', () => {
+randomBtn.addEventListener('click', () => {
     colorMode = false;
     showMode();
 });
 
-defaultBtn.addEventListener('mousedown', () => {
+defaultBtn.addEventListener('click', () => {
     colorMode = true;
     showMode();
 });
+
+eraser.addEventListener('click', () => {
+    colorMode = 'erase';
+    showMode();
+});
+
+clearBtn.addEventListener('click', () => {
+    document.querySelectorAll('.grid-box').forEach(box => {
+       box.style.cssText = 'background: white; border-color: var(--gray);'; 
+    });
+});
+

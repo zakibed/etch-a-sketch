@@ -13,7 +13,7 @@ button {
     padding: 3px;
     background: white;
     border: 1px solid black;
-    transition: all 120ms ease-in;
+    transition: all 115ms ease-in;
     cursor: pointer;
 }
 
@@ -32,4 +32,13 @@ button {
 #default-btn {
     color: white;
     background: green;
+}
+
+#clear-btn {
+    transition: all 50ms ease-out;
+}
+
+#clear-btn:active {
+    color: white;
+    background: red;
 }
