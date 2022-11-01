@@ -8,6 +8,15 @@
     --gray: #c9c9c9;
 }
 
+button {
+    width: 90px;
+    padding: 3px;
+    background: white;
+    border: 1px solid black;
+    transition: all 120ms ease-in;
+    cursor: pointer;
+}
+
 .container-display {
     width: 700px;
     height: 700px;
@@ -20,7 +29,7 @@
     transition: all 20ms linear;
 }
 
-button:hover {
+#default-btn {
     color: white;
     background: green;
 }

@@ -23,6 +23,19 @@ function setGridSize () {
     createGrid();
 }
 
+function showMode() {
+    const toggleOn = 'color: white; background: green;';
+    const toggleOff = 'color: black; background: white;'
+
+    if (colorMode === true) {
+        defaultBtn.style.cssText = toggleOn;
+        randomBtn.style.cssText = toggleOff;
+    } else {
+        randomBtn.style.cssText = toggleOn;
+        defaultBtn.style.cssText = toggleOff;
+    }
+}
+
 function createGrid () {
     const gridSize = Math.pow(range.value, 2);
 
@@ -37,7 +50,7 @@ function createGrid () {
                                         repeat(${range.value}, 1fr)`;
 }
 
-function changeColorMode() {
+function toggleColorMode() {
     const gridBoxes = document.querySelectorAll('.grid-box');
 
     if (colorMode === true) {
@@ -53,9 +66,9 @@ function changeColorMode() {
 
         gridBoxes.forEach(box => {
             box.addEventListener('mouseover', function () {
-                const r = Math.random() * 255,
-                      g = Math.random() * 255,
-                      b = Math.random() * 255;
+                const r = Math.floor(Math.random() * 255),
+                      g = Math.floor(Math.random() * 255),
+                      b = Math.floor(Math.random() * 255);
 
                 this.style.background = `rgb(${r}, ${g}, ${b})`;
                 this.style.borderColor = `rgb(${r}, ${g}, ${b})`;
@@ -68,7 +81,16 @@ function changeColorMode() {
 range.addEventListener('input', outputRange);
 range.addEventListener('click', setGridSize);
 
-sketchDisplay.addEventListener('mousedown', changeColorMode);
+sketchDisplay.addEventListener('mousedown', () => {
+    this.addEventListener('mouseover', toggleColorMode);
+});
 
-randomBtn.addEventListener('click', () => colorMode = false);
-defaultBtn.addEventListener('click', () => colorMode = true);
+randomBtn.addEventListener('mousedown', () => {
+    colorMode = false;
+    showMode();
+});
+
+defaultBtn.addEventListener('mousedown', () => {
+    colorMode = true;
+    showMode();
+});
