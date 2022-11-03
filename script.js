@@ -1,18 +1,27 @@
 const sketchDisplay = document.querySelector('.container-display');
+
 const range = document.querySelector('#grid-range');
 const color = document.querySelector('#color-picker');
+
 const defaultBtn = document.querySelector('#default-btn');
 const randomBtn = document.querySelector('#random-btn');
+
+const gradientBtn = document.querySelector('#gradient-btn');
+const eraserBtn = document.querySelector('#eraser-btn');
 const clearBtn = document.querySelector('#clear-btn');
-const eraser = document.querySelector('#eraser-btn');
 
 let colorMode = true;
-
+let gradValue = 255;
 
 range.value = 16;
 color.value = '#c9c9c9';
 
 createGrid();
+
+function setGridSize () {
+    sketchDisplay.innerHTML = '';
+    createGrid();
+}
 
 function outputRange () {
     document.querySelectorAll('.grid-value').forEach(val => {
@@ -20,26 +29,27 @@ function outputRange () {
     });
 }
 
-function setGridSize () {
-    sketchDisplay.innerHTML = '';
-    createGrid();
+function clickButton(btn, mode) {
+    btn.addEventListener('click', () => {
+        colorMode = mode;
+        showMode();
+    });
 }
 
-function showMode() {
+function showMode () {
     const toggleOn = 'color: white; background: green;';
     const toggleOff = 'color: black; background: white;';
 
     defaultBtn.style.cssText = toggleOff;
     randomBtn.style.cssText = toggleOff;
-    eraser.style.cssText = toggleOff;
+    gradientBtn.style.cssText = toggleOff;
+    eraserBtn.style.cssText = toggleOff;
 
     if (colorMode === true) defaultBtn.style.cssText = toggleOn;
     if (colorMode === false) randomBtn.style.cssText = toggleOn;
 
-    if (typeof colorMode !== 'boolean') {
-        defaultBtn.style.cssText = toggleOff;
-        eraser.style.cssText = 'color: white; background: red';
-    }
+    if (colorMode === 'gradient') gradientBtn.style.cssText = 'color: white; background: gray;';
+    if (colorMode === 'erase') eraserBtn.style.cssText = 'color: white; background: red;';
 }
 
 function createGrid () {
@@ -56,37 +66,44 @@ function createGrid () {
                                         repeat(${range.value}, 1fr)`;
 }
 
-function toggleColorMode() {
-    const gridBoxes = document.querySelectorAll('.grid-box');
+function toggleColorMode () {
+    function toggle(func) {
+        document.querySelectorAll('.grid-box').forEach(box => {
+            box.addEventListener('mouseover', func);
+        });
+    }
 
     if (colorMode === true) {
 
-        gridBoxes.forEach(box => {
-            box.addEventListener('mouseover', function () {
-                this.style.background = color.value;
-                this.style.borderColor = color.value;
-            });
+        toggle(function () {
+            this.style.background = color.value;
+            this.style.borderColor = color.value;
         });
 
     } else if (colorMode === false) {
 
-        gridBoxes.forEach(box => {
-            box.addEventListener('mouseover', function () {
-                const r = Math.floor(Math.random() * 255),
-                      g = Math.floor(Math.random() * 255),
-                      b = Math.floor(Math.random() * 255);
+        toggle(function () {
+            const r = Math.floor(Math.random() * 255),
+                  g = Math.floor(Math.random() * 255),
+                  b = Math.floor(Math.random() * 255);
 
-                this.style.background = `rgb(${r}, ${g}, ${b})`;
-                this.style.borderColor = `rgb(${r}, ${g}, ${b})`;
-            });
+            this.style.background = `rgb(${r}, ${g}, ${b})`;
+            this.style.borderColor = `rgb(${r}, ${g}, ${b})`;
+        });
+
+    } else if (colorMode === 'gradient') {
+
+        toggle(function () {
+            this.style.background = `rgb(${gradValue}, ${gradValue}, ${gradValue})`;
+            this.style.borderColor = `rgb(${gradValue}, ${gradValue}, ${gradValue})`;
+
+            if (gradValue > 0) gradValue -= 0.5;
         });
 
     } else {
 
-        gridBoxes.forEach(box => {
-            box.addEventListener('mouseover', function () {
-                this.style.cssText = 'background: white; border-color: var(--gray);'; 
-            });
+        toggle(function () {
+            this.style.cssText = 'background: white; border-color: var(--gray);'; 
         });
 
     }
@@ -95,28 +112,18 @@ function toggleColorMode() {
 range.addEventListener('input', outputRange);
 range.addEventListener('click', setGridSize);
 
-sketchDisplay.addEventListener('mousedown', () => {
-    this.addEventListener('mouseover', toggleColorMode);
-});
-
-randomBtn.addEventListener('click', () => {
-    colorMode = false;
-    showMode();
-});
-
-defaultBtn.addEventListener('click', () => {
-    colorMode = true;
-    showMode();
-});
-
-eraser.addEventListener('click', () => {
-    colorMode = 'erase';
-    showMode();
-});
+clickButton(defaultBtn, true);
+clickButton(randomBtn, false);
+clickButton(gradientBtn, 'gradient');
+clickButton(eraserBtn, 'erase');
 
 clearBtn.addEventListener('click', () => {
     document.querySelectorAll('.grid-box').forEach(box => {
        box.style.cssText = 'background: white; border-color: var(--gray);'; 
     });
+});
+
+sketchDisplay.addEventListener('mousedown', () => {
+    this.addEventListener('mouseover', toggleColorMode);
 });
 
