@@ -11,7 +11,7 @@ const clearBtn = document.querySelector('#clear-btn');
 
 let colorMode = true;
 
-range.value = 16;
+range.value = 10;
 color.value = '#c9c9c9';
 
 createGrid();
@@ -22,9 +22,8 @@ function setGridSize () {
 }
 
 function outputRange () {
-    document.querySelectorAll('.grid-value').forEach(val => {
-        val.textContent = this.value;
-    });
+    document.querySelector('#grid-value1').textContent = range.value;
+    document.querySelector('#grid-value2').textContent = range.value * 2;
 }
 
 function clickButton(btn, mode) {
@@ -49,7 +48,7 @@ function showMode () {
 }
 
 function createGrid () {
-    for (let i = 0; i < Math.pow(range.value, 2); i++) {
+    for (let i = 0; i < range.value * (range.value * 2); i++) {
         const div = document.createElement('div');
         div.className = 'grid-box';
 
@@ -57,7 +56,7 @@ function createGrid () {
     }
 
     sketchDisplay.style.gridTemplate = `repeat(${range.value}, 1fr) / 
-                                        repeat(${range.value}, 1fr)`;
+                                        repeat(${range.value * 2}, 1fr)`;
 }
 
 function toggleColorMode () {

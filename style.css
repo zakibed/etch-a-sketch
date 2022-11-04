@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
+
 * {
     box-sizing: border-box;
     margin:0;
@@ -6,6 +10,16 @@
 
 :root {
     --gray: #c9c9c9;
+    --red: #d72929;
+}
+
+html {
+    font-size: 25px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: white
 }
 
 button {
@@ -17,16 +31,77 @@ button {
     cursor: pointer;
 }
 
+h1 {
+    font-family: 'Courgette', cursive;
+    font-size: 3rem;
+    font-style: normal;
+    letter-spacing: -4px;
+}
+
+i {
+    font-size: 2.5rem;
+}
+
+/* header */
+#header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#header > div {
+    border: 3px solid gold;
+    border-radius: 7px;
+}
+
+i, h1, .text, #original {
+    color: gold;
+}
+
+.text {
+    margin: 0 25px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.8rem;
+    font-style: italic;
+    letter-spacing: 2px;
+}
+
+.fa-globe {
+    color: var(--red);
+}
+
+#original {
+    margin: 2.7rem 5px 0;
+}
+
+/* container */
+.container {
+    margin: 1rem auto;
+    width: 70%;
+    display: flex;
+    padding: 30px 0 40px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--red);
+    border-radius: 50px;
+}
+
 .container-display {
-    width: 700px;
-    height: 700px;
+    width: 1000px;
+    height: 500px;
+    margin: 20px 0 30px;
     display: grid;
+    background: white;
     border: 2px solid var(--gray);
+    border-radius: 20px;
 }
 
 .container-display > div {
     border: 1px solid var(--gray);
 }
+
+.container-dip
 
 #default-btn {
     color: white;

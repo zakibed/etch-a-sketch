@@ -5,27 +5,43 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Etch-a-Sketch</title>
         <link rel="stylesheet" href="style.css">
+        <script src="https://kit.fontawesome.com/ea6e9201dc.js" crossorigin="anonymous"></script>
         <script src="script.js" defer></script>
     </head>
     <body>
-        <div id="preferences">
-            <p><span class="grid-value">16</span>x<span class="grid-value">16</span></p>
-            <input type="range" min="16" max="64" id="grid-range" value="16">
+        <div class="container">
+            <header id="header">
+                <div class="fa-stack fa-2x">
+                    <i class="fa-solid fa-circle fa-stack-1x"></i>
+                    <i class="fa-solid fa-globe fa-stack-1x"></i>
+                    <i class="fa-solid fa-earth-asia fa-stack-1x"></i>
+                    <i class="fa-regular fa-circle fa-stack-1x"></i>
+                </div>
+                <p id="original">&reg;</p>
+                <p class="text">MAGIC</p>
+                <h1>Etch <span id="a">A</span> Sketch</h1>
+                <p class="text">SCREEN</p>
+            </header>
 
-            <div id="color">
-                <label for="color-picker">Choose default color:</label>
-                <input type="color" id="color-picker" value="#c9c9c9">
-            </div>
-
-            <div id="mode-buttons">
-                <p>Color Mode:</p>
-                <button id="default-btn" class="color-mode">Default</button>
-                <button id="random-btn" class="color-mode">Multi-Color</button>
-                <button id="eraser-btn">Eraser</button>
-                <button id="clear-btn">Clear</button>
+            <div class="container-display"></div>
+            
+            <div id="preferences">
+                <p><span id="grid-value1">10</span>x<span id="grid-value2">20</span></p>
+                <input type="range" min="10" max="40" id="grid-range" value="10">
+    
+                <div id="color">
+                    <label for="color-picker">Choose default color:</label>
+                    <input type="color" id="color-picker" value="#c9c9c9">
+                </div>
+    
+                <div id="mode-buttons">
+                    <p>Color Mode:</p>
+                    <button id="default-btn" class="color-mode">Default</button>
+                    <button id="random-btn" class="color-mode">Multi-Color</button>
+                    <button id="eraser-btn">Eraser</button>
+                    <button id="clear-btn">Clear</button>
+                </div>
             </div>
         </div>
-
-        <div class="container-display"></div>
     </body>
 </html>
