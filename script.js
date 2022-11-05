@@ -1,6 +1,6 @@
 const sketchDisplay = document.querySelector('.container-display');
 
-const range = document.querySelector('#grid-range');
+const range = document.querySelector('input[type="range"]');
 const color = document.querySelector('#color-picker');
 
 const defaultBtn = document.querySelector('#default-btn');
@@ -12,7 +12,7 @@ const clearBtn = document.querySelector('#clear-btn');
 let colorMode = true;
 
 range.value = 10;
-color.value = '#c9c9c9';
+color.value = '#909090';
 
 createGrid();
 
@@ -20,6 +20,7 @@ function setGridSize () {
     sketchDisplay.innerHTML = '';
     createGrid();
 }
+
 
 function outputRange () {
     document.querySelector('#grid-value1').textContent = range.value;
@@ -48,7 +49,9 @@ function showMode () {
 }
 
 function createGrid () {
-    for (let i = 0; i < range.value * (range.value * 2); i++) {
+    const rangeValue = range.value * 2;
+
+    for (let i = 0; i < range.value * rangeValue; i++) {
         const div = document.createElement('div');
         div.className = 'grid-box';
 
@@ -56,7 +59,7 @@ function createGrid () {
     }
 
     sketchDisplay.style.gridTemplate = `repeat(${range.value}, 1fr) / 
-                                        repeat(${range.value * 2}, 1fr)`;
+                                        repeat(${rangeValue}, 1fr)`;
 }
 
 function toggleColorMode () {
@@ -82,7 +85,7 @@ function toggleColorMode () {
         });
     } else {
         toggle(function () {
-            this.style.cssText = 'background: white; border-color: var(--gray);'; 
+            this.style.cssText = 'background: white; border-color: white;'; 
         });
     }
 }
@@ -96,7 +99,7 @@ clickButton(eraserBtn, 'erase');
 
 clearBtn.addEventListener('click', () => {
     document.querySelectorAll('.grid-box').forEach(box => {
-       box.style.cssText = 'background: white; border-color: var(--gray);'; 
+       box.style.cssText = 'background: white; border-color: white;'; 
     });
 });
 

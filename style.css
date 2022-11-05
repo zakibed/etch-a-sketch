@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Damion&family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
 
 * {
     box-sizing: border-box;
@@ -9,8 +7,8 @@
 }
 
 :root {
-    --gray: #c9c9c9;
-    --red: #d72929;
+    --main: #909090;
+    --main-red: #d72929;
 }
 
 html {
@@ -19,7 +17,7 @@ html {
 
 body {
     font-family: 'Roboto', sans-serif;
-    color: white
+    color: white;
 }
 
 button {
@@ -32,10 +30,10 @@ button {
 }
 
 h1 {
-    font-family: 'Courgette', cursive;
-    font-size: 3rem;
+    font-family: 'Damion', cursive;
+    font-size: 3.5rem;
     font-style: normal;
-    letter-spacing: -4px;
+    /* letter-spacing: px; */
 }
 
 i {
@@ -54,12 +52,12 @@ i {
     border-radius: 7px;
 }
 
-i, h1, .text, #original {
+i, h1, .magic-screen, .og {
     color: gold;
 }
 
-.text {
-    margin: 0 25px;
+.magic-screen {
+    margin: 0 30px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 1.8rem;
     font-style: italic;
@@ -67,41 +65,78 @@ i, h1, .text, #original {
 }
 
 .fa-globe {
-    color: var(--red);
+    color: var(--main-red);
 }
 
-#original {
+.og {
     margin: 2.7rem 5px 0;
+}
+
+.og.second {
+    margin: 0 0 1.4rem 5px;
+    font-size: 1.3rem;
 }
 
 /* container */
 .container {
     margin: 1rem auto;
-    width: 70%;
-    display: flex;
+    width: 53rem;
     padding: 30px 0 40px;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--red);
+    background-color: var(--main-red);
     border-radius: 50px;
 }
 
 .container-display {
-    width: 1000px;
-    height: 500px;
-    margin: 20px 0 30px;
+    width: 40rem;
+    height: 20rem;
+    margin: 20px 0 15px;
     display: grid;
     background: white;
-    border: 2px solid var(--gray);
-    border-radius: 20px;
+    border: 2px solid var(--main);
 }
 
 .container-display > div {
-    border: 1px solid var(--gray);
+    border: 1px solid white;
 }
 
-.container-dip
+/* color */
+input[type='range'] {
+    appearance: none;
+    width: 20rem;
+    margin: 10px 0 15px;
+    border-radius: 25px;
+    background: #b02222;
+}
+
+input[type='range']::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--main);
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+}
+
+#grid-range > p {
+    margin: 0 auto;
+    padding: 2px 0;
+    width: 4rem;
+    color: #5e5e5e;
+    text-align: center;
+    border: 3px solid #b02222;
+    border-radius: 10px;
+    background: white;
+}
+
+#preferences {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 #default-btn {
     color: white;
