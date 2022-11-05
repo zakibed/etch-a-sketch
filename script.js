@@ -21,7 +21,6 @@ function setGridSize () {
     createGrid();
 }
 
-
 function outputRange () {
     document.querySelector('#grid-value1').textContent = range.value;
     document.querySelector('#grid-value2').textContent = range.value * 2;
@@ -35,15 +34,15 @@ function clickButton(btn, mode) {
 }
 
 function showMode () {
-    const toggleOn = 'color: white; background: green;';
+    const randomStyle = 'linear-gradient(60deg, red, orange, yellow, green, blue, purple)';
     const toggleOff = 'color: black; background: white;';
 
     defaultBtn.style.cssText = toggleOff;
     randomBtn.style.cssText = toggleOff;
     eraserBtn.style.cssText = toggleOff;
 
-    if (colorMode === true) defaultBtn.style.cssText = toggleOn;
-    if (colorMode === false) randomBtn.style.cssText = toggleOn;
+    if (colorMode === true) defaultBtn.style.cssText = `color: white; background: ${color.value};`;
+    if (colorMode === false) randomBtn.style.cssText = `color: white; background: ${randomStyle};`;
 
     if (typeof colorMode !== 'boolean') eraserBtn.style.cssText = 'color: white; background: red;';
 }
@@ -101,6 +100,10 @@ clearBtn.addEventListener('click', () => {
     document.querySelectorAll('.grid-box').forEach(box => {
        box.style.cssText = 'background: white; border-color: white;'; 
     });
+});
+
+color.addEventListener('change', () => {
+    if (colorMode === true) defaultBtn.style.cssText = `color: white; background: ${color.value}`;
 });
 
 sketchDisplay.addEventListener('mousedown', () => {

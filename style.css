@@ -7,8 +7,10 @@
 }
 
 :root {
-    --main: #909090;
+    --main-gray: #909090;
+    --dark-gray: #5e5e5e;
     --main-red: #d72929;
+    --dark-red: #b02222;
 }
 
 html {
@@ -21,12 +23,15 @@ body {
 }
 
 button {
-    width: 90px;
-    padding: 3px;
+    width: 108px;
+    padding: 4px 0;
+    font-size: 0.7rem;
+    color: var(--dark-gray);
+    border: 3px solid var(--dark-red);
+    border-radius: 5px;
     background: white;
-    border: 1px solid black;
-    transition: all 115ms ease-in;
     cursor: pointer;
+    transition: all 60ms ease-in;
 }
 
 h1 {
@@ -72,11 +77,11 @@ i, h1, .magic-screen, .og {
 }
 
 .og.i {
-    margin: 2.7rem 5px 0;
+    margin: 3rem 5px 0;
 }
 
 .og.h1 {
-    margin: 0 0 1.4rem 5px;
+    margin: 0 0 1.4rem;
     font-size: 1.3rem;
 }
 
@@ -84,7 +89,7 @@ i, h1, .magic-screen, .og {
 .container {
     margin: 1rem auto;
     width: 53rem;
-    padding: 30px 0 40px;
+    padding: 30px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -99,26 +104,29 @@ i, h1, .magic-screen, .og {
     margin: 20px 0 15px;
     display: grid;
     background: white;
-    border: 2px solid var(--main);
+    border: 2px solid var(--main-gray);
 }
 
-.container-display > div {
-    border: 1px solid white;
+/* settings */
+#settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* color */
+/* grid range */
 input[type='range'] {
     appearance: none;
     width: 20rem;
     margin: 10px 0 15px;
     border-radius: 25px;
-    background: #b02222;
+    background: var(--dark-red);
 }
 
 input[type='range']::-moz-range-thumb {
     width: 30px;
     height: 30px;
-    border: 2px solid var(--main);
+    border: 2px solid var(--main-gray);
     border-radius: 50%;
     background: white;
     cursor: pointer;
@@ -128,51 +136,33 @@ input[type='range']::-moz-range-thumb {
     margin: 0 auto;
     padding: 2px 0;
     width: 4rem;
-    color: #5e5e5e;
+    color: var(--dark-gray);
     text-align: center;
-    border: 3px solid #b02222;
+    border: 3px solid var(--dark-red);
     border-radius: 10px;
     background: white;
 }
 
-#preferences {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* color picker */
+label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: gold;
 }
 
-.circle {
-    width: 6rem;
-    height: 6rem;
-    margin-top: 1.2em;
-    font-size: 25px;
-    border: 2px solid var(--main);
-    border-radius: 50%;
-    background: white;
-    position: absolute;
+#color-picker {
+    height: 30px;
+    margin-bottom: 20px;
+    border: 3px solid gold;
+    border-radius: 2px;
+    position: relative;
+    top: 3px;
 }
 
-.circle.left-circle {
-    left: 12.6em;
-}
-
-.circle.right-circle {
-    right: 12.6em;
-}
-
-.inner-circle {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--main);
-    position: absolute;
-    left: 48%;
-    top: 48%;
-}
-
+/* modes */
 #default-btn {
     color: white;
-    background: green;
+    background: var(--main-gray);
 }
 
 #clear-btn {
@@ -181,5 +171,35 @@ input[type='range']::-moz-range-thumb {
 
 #clear-btn:active {
     color: white;
-    background: red;
+    background: main-red;
+}
+
+/* circles */
+.circle {
+    width: 6rem;
+    height: 6rem;
+    margin-top: 1.5em;
+    font-size: 25px;
+    border: 2px solid var(--main-gray);
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+}
+
+.circle.left-circle {
+    left: 12.5em;
+}
+
+.circle.right-circle {
+    right: 12.5em;
+}
+
+.inner-circle {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--main-gray);
+    position: absolute;
+    left: 48%;
+    top: 48%;
 }
