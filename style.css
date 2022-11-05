@@ -33,7 +33,6 @@ h1 {
     font-family: 'Damion', cursive;
     font-size: 3.5rem;
     font-style: normal;
-    /* letter-spacing: px; */
 }
 
 i {
@@ -64,15 +63,19 @@ i, h1, .magic-screen, .og {
     letter-spacing: 2px;
 }
 
+.fa-stack {
+    margin-left: 25px;
+}
+
 .fa-globe {
     color: var(--main-red);
 }
 
-.og {
+.og.i {
     margin: 2.7rem 5px 0;
 }
 
-.og.second {
+.og.h1 {
     margin: 0 0 1.4rem 5px;
     font-size: 1.3rem;
 }
@@ -136,6 +139,35 @@ input[type='range']::-moz-range-thumb {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.circle {
+    width: 6rem;
+    height: 6rem;
+    margin-top: 1.2em;
+    font-size: 25px;
+    border: 2px solid var(--main);
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+}
+
+.circle.left-circle {
+    left: 12.6em;
+}
+
+.circle.right-circle {
+    right: 12.6em;
+}
+
+.inner-circle {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--main);
+    position: absolute;
+    left: 48%;
+    top: 48%;
 }
 
 #default-btn {
