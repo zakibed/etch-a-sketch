@@ -103,7 +103,7 @@ clearBtn.addEventListener('click', () => {
 });
 
 color.addEventListener('change', () => {
-    defaultBtn.style.cssText = `color: white; background: ${color.value}`;
+    if (colorMode === true) defaultBtn.style.cssText = `color: white; background: ${color.value}`;
 });
 
 sketchDisplay.addEventListener('mousedown', () => {
