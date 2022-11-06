@@ -109,4 +109,3 @@ color.addEventListener('change', () => {
 sketchDisplay.addEventListener('mousedown', () => {
     this.addEventListener('mouseover', toggleColorMode);
 });
-
