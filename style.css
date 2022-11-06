@@ -238,7 +238,7 @@ label {
     }
 
     .magic-screen {
-        display: none;
+        margin: 0 15px;
     }
 
     #circles {
