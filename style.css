@@ -2,8 +2,8 @@
 
 * {
     box-sizing: border-box;
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
 }
 
 :root {
@@ -11,10 +11,6 @@
     --dark-gray: #5e5e5e;
     --main-red: #d72929;
     --dark-red: #b02222;
-}
-
-html {
-    font-size: 25px;
 }
 
 body {
@@ -56,7 +52,10 @@ i {
     border-radius: 7px;
 }
 
-i, h1, .magic-screen, .og {
+i,
+h1,
+.magic-screen,
+.og {
     color: gold;
 }
 
@@ -126,8 +125,8 @@ input[type='range'] {
 
 input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     border: 2px solid var(--main-gray);
     border-radius: 50%;
     background: white;
@@ -152,19 +151,19 @@ input[type='range']::-ms-thumb {
     cursor: pointer;
 }
 
-input[type=range]::-webkit-slider-runnable-track {
+input[type='range']::-webkit-slider-runnable-track {
     width: 20rem;
     border-radius: 25px;
     background: var(--dark-red);
 }
 
-input[type=range]::-moz-range-track {
+input[type='range']::-moz-range-track {
     width: 20rem;
     border-radius: 25px;
     background: var(--dark-red);
 }
 
-input[type=range]::-ms-track {
+input[type='range']::-ms-track {
     width: 20rem;
     border-radius: 25px;
     background: var(--dark-red);
@@ -199,7 +198,7 @@ label {
 }
 
 /* modes */
-#default-btn {
+#default-color-btn {
     color: white;
     background: var(--main-gray);
 }
@@ -254,7 +253,8 @@ footer {
     text-align: center;
 }
 
-footer > a, footer i {
+footer > a,
+footer i {
     font-size: 22px;
     color: black;
 }
