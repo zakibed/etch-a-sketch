@@ -5,7 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Etch-a-Sketch</title>
         <link rel="stylesheet" href="style.css" />
-        <script src="https://kit.fontawesome.com/ea6e9201dc.js" crossorigin="anonymous"></script>
+        <script
+            src="https://kit.fontawesome.com/ea6e9201dc.js"
+            crossorigin="anonymous"
+        ></script>
         <script src="script.js" defer></script>
     </head>
     <body>
@@ -27,21 +30,29 @@
                 <p class="magic-screen">SCREEN</p>
             </header>
 
-            <div class="container-display"></div>
+            <div class="sketch-display"></div>
 
             <div id="settings">
                 <div id="grid-range">
-                    <p><span id="grid-value1">10</span>x<span id="grid-value2">20</span></p>
+                    <p>
+                        <span id="grid-value1">10</span>x<span id="grid-value2"
+                            >20</span
+                        >
+                    </p>
                     <input type="range" min="10" max="60" value="10" />
                 </div>
 
                 <div id="color">
-                    <label> Pick a Color : <input type="color" id="color-picker" value="#c9c9c9" /> </label>
+                    <label>
+                        Pick a Color :
+                        <input type="color" id="color-picker" value="#c9c9c9" />
+                    </label>
                 </div>
 
                 <div id="mode-buttons">
                     <button id="default-color-btn">Default</button>
                     <button id="rainbow-color-btn">Rainbow</button>
+                    <button id="gradient-btn">Gradient</button>
                     <button id="eraser-btn">Eraser</button>
                     <button id="clear-btn">Clear</button>
                 </div>
