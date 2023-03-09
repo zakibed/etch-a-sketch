@@ -4,11 +4,9 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Etch-a-Sketch</title>
+        <link rel="icon" href="favicon.ico" />
         <link rel="stylesheet" href="style.css" />
-        <script
-            src="https://kit.fontawesome.com/ea6e9201dc.js"
-            crossorigin="anonymous"
-        ></script>
+        <script src="https://kit.fontawesome.com/ea6e9201dc.js" crossorigin="anonymous"></script>
         <script src="script.js" defer></script>
     </head>
     <body>
@@ -34,11 +32,7 @@
 
             <div id="settings">
                 <div id="grid-range">
-                    <p>
-                        <span id="grid-value1">10</span>x<span id="grid-value2"
-                            >20</span
-                        >
-                    </p>
+                    <p><span id="grid-value1">10</span>x<span id="grid-value2">20</span></p>
                     <input type="range" min="10" max="60" value="10" />
                 </div>
 
@@ -49,9 +43,9 @@
                     </label>
                 </div>
 
-                <div id="mode-buttons">
-                    <button id="default-color-btn">Default</button>
-                    <button id="rainbow-color-btn">Rainbow</button>
+                <div id="sketch-modes">
+                    <button id="default-btn">Default</button>
+                    <button id="rainbow-btn">Rainbow</button>
                     <button id="gradient-btn">Gradient</button>
                     <button id="eraser-btn">Eraser</button>
                     <button id="clear-btn">Clear</button>
