@@ -11,6 +11,7 @@
     --dark-gray: #5e5e5e;
     --main-red: #d72929;
     --dark-red: #b02222;
+    --color-picker-value: #909090;
 }
 
 body {
@@ -198,18 +199,34 @@ label {
 }
 
 /* modes */
-#default-color-btn {
-    color: white;
-    background: var(--main-gray);
-}
-
 #clear-btn {
     transition: all 30ms ease-out;
 }
 
-#clear-btn:active {
+#clear-btn:active,
+.eraser-active {
     color: white;
     background: red;
+}
+
+.default-active {
+    color: white;
+    background: var(--color-picker-value);
+}
+
+.mode-inactive {
+    color: var(--dark-gray);
+    background: white;
+}
+
+.rainbow-active {
+    color: white;
+    background: linear-gradient(60deg, red, orange, yellow, green, blue, purple);
+}
+
+.gradient-active {
+    color: white;
+    background: linear-gradient(60deg, #000000 0%, #212121 35%, #6f6f6f 100%);
 }
 
 /* circles */
