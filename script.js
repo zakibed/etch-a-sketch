@@ -1,20 +1,25 @@
-const sketchDisplay = document.querySelector('.container-display');
-const range = document.querySelector('input[type="range"]');
+const sketchDisplay = document.querySelector('.sketch-display');
+const gridRange = document.querySelector('input[type="range"]');
 const color = document.querySelector('#color-picker');
 const defaultColorBtn = document.querySelector('#default-color-btn');
 const rainbowColorBtn = document.querySelector('#rainbow-color-btn');
 const eraserBtn = document.querySelector('#eraser-btn');
 const clearBtn = document.querySelector('#clear-btn');
 let colorMode = 'default';
+let isSketching = false;
 
 function setGridSize() {
-    sketchDisplay.innerHTML = '';
+    document
+        .querySelectorAll('.sketch-display > div')
+        .forEach((e) => e.remove());
+
     createGrid();
+    toggleSketch();
 }
 
 function displayRange() {
-    document.querySelector('#grid-value1').textContent = range.value;
-    document.querySelector('#grid-value2').textContent = range.value * 2;
+    document.querySelector('#grid-value1').textContent = gridRange.value;
+    document.querySelector('#grid-value2').textContent = gridRange.value * 2;
 }
 
 function displayColorMode() {
@@ -36,57 +41,49 @@ function displayColorMode() {
 }
 
 function createGrid() {
-    const rangeValue = range.value * 2;
+    const x = gridRange.value * 2;
+    const y = gridRange.value;
 
-    for (let i = 0; i < range.value * rangeValue; i++) {
+    for (let i = 0; i < x * y; i++) {
         const div = document.createElement('div');
-        div.className = 'grid-box';
+        div.className = 'grid-cell';
 
         sketchDisplay.appendChild(div);
     }
 
-    sketchDisplay.style.gridTemplate = `repeat(${range.value}, 1fr) / 
-                                        repeat(${rangeValue}, 1fr)`;
+    sketchDisplay.style.gridTemplate = `repeat(${y}, 1fr) / repeat(${x}, 1fr)`;
 }
 
-function toggleColorMode() {
-    function toggle(func) {
-        document.querySelectorAll('.grid-box').forEach((box) => {
-            box.addEventListener('mouseover', func);
-        });
-    }
+function toggleSketch() {
+    document.querySelectorAll('.grid-cell').forEach((box) => {
+        box.addEventListener('mouseover', function () {
+            if (isSketching) {
+                if (colorMode === 'default') {
+                    this.style.cssText = `background: ${color.value}; border-color: ${color.value};`;
+                } else if (colorMode === 'rainbow') {
+                    const r = Math.floor(Math.random() * 255);
+                    const g = Math.floor(Math.random() * 255);
+                    const b = Math.floor(Math.random() * 255);
 
-    if (colorMode === 'default') {
-        toggle(function () {
-            this.style.cssText = `background: ${color.value}; border-color: ${color.value};`;
+                    this.style.cssText = `background: rgb(${r}, ${g}, ${b}); border-color: rgb(${r}, ${g}, ${b});`;
+                } else {
+                    this.style.cssText =
+                        'background: white; border-color: white;';
+                }
+            }
         });
-    } else if (colorMode === 'rainbow') {
-        toggle(function () {
-            const r = Math.floor(Math.random() * 255);
-            const g = Math.floor(Math.random() * 255);
-            const b = Math.floor(Math.random() * 255);
-
-            this.style.cssText = `background: rgb(${r}, ${g}, ${b}); border-color: rgb(${r}, ${g}, ${b});`;
-        });
-    } else {
-        toggle(function () {
-            this.style.cssText = 'background: white; border-color: white;';
-        });
-    }
+    });
 }
 
 window.onload = () => {
-    range.value = 10;
+    gridRange.value = 10;
     color.value = '#909090';
     createGrid();
+    toggleSketch();
 };
 
-range.addEventListener('input', displayRange);
-range.addEventListener('click', setGridSize);
-
-sketchDisplay.addEventListener('mousedown', () => {
-    this.addEventListener('mouseover', toggleColorMode);
-});
+gridRange.addEventListener('input', displayRange);
+gridRange.addEventListener('change', setGridSize);
 
 color.addEventListener('change', () => {
     if (colorMode === 'default') {
@@ -95,7 +92,7 @@ color.addEventListener('change', () => {
 });
 
 clearBtn.addEventListener('click', () => {
-    document.querySelectorAll('.grid-box').forEach((box) => {
+    document.querySelectorAll('.grid-cell').forEach((box) => {
         box.style.cssText = 'background: white; border-color: white;';
     });
 });
@@ -105,7 +102,13 @@ document.querySelectorAll('#mode-buttons > button').forEach((btn) => {
         if (btn.id === 'default-color-btn') colorMode = 'default';
         if (btn.id === 'rainbow-color-btn') colorMode = 'rainbow';
         if (btn.id === 'eraser-btn') colorMode = 'eraser';
-
         displayColorMode();
     });
 });
+
+sketchDisplay.addEventListener('mousedown', (e) => {
+    isSketching = true;
+    e.preventDefault();
+});
+
+sketchDisplay.addEventListener('mouseup', () => (isSketching = false));
