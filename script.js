@@ -21,7 +21,7 @@ function createGrid() {
         const div = document.createElement('div');
 
         div.className = 'grid-cell';
-        div.addEventListener('mouseover', toggleSketch);
+        div.addEventListener('mouseover', toggleSketchMode);
         sketchDisplay.appendChild(div);
     }
 
@@ -33,18 +33,16 @@ function displayGridSize() {
     document.querySelector('#grid-value2').textContent = gridRange.value * 2;
 }
 
-function displaySketchMode() {
-    document
-        .querySelectorAll('#sketch-modes > button')
-        .forEach((e) => (e.className = 'mode-inactive'));
+function selectSketchMode() {
+    if (this.id === 'default-btn') sketchMode = 'default';
+    if (this.id === 'rainbow-btn') sketchMode = 'rainbow';
+    if (this.id === 'gradient-btn') sketchMode = 'gradient';
+    if (this.id === 'eraser-btn') sketchMode = 'eraser';
 
-    if (sketchMode === 'default') defaultBtn.className = 'default-active';
-    if (sketchMode === 'rainbow') rainbowBtn.className = 'rainbow-active';
-    if (sketchMode === 'gradient') gradientBtn.className = 'gradient-active';
-    if (sketchMode === 'eraser') eraserBtn.className = 'eraser-active';
+    displaySketchMode();
 }
 
-function toggleSketch() {
+function toggleSketchMode() {
     if (isSketching) {
         if (sketchMode === 'default') {
             this.style.background = colorPicker.value;
@@ -71,42 +69,40 @@ function toggleSketch() {
     }
 }
 
-window.onload = () => {
+function displaySketchMode() {
+    document
+        .querySelectorAll('#sketch-modes > button')
+        .forEach((e) => (e.className = 'mode-inactive'));
+
+    if (sketchMode === 'default') defaultBtn.className = 'default-active';
+    if (sketchMode === 'rainbow') rainbowBtn.className = 'rainbow-active';
+    if (sketchMode === 'gradient') gradientBtn.className = 'gradient-active';
+    if (sketchMode === 'eraser') eraserBtn.className = 'eraser-active';
+}
+
+function resetValues() {
     gridRange.value = 10;
     colorPicker.value = '#909090';
     defaultBtn.className = 'default-active';
     createGrid();
-};
+}
 
-gridRange.addEventListener('input', displayGridSize);
-gridRange.addEventListener('change', createGrid);
-
-clearBtn.addEventListener('click', () => {
-    document.querySelectorAll('.grid-cell').forEach((box) => {
-        box.style.cssText = 'background: white; border-color: white;';
-    });
-});
-
-colorPicker.addEventListener('change', function () {
+function changeDefaultBtnColor() {
     document
         .querySelector(':root')
         .style.setProperty('--color-picker-value', colorPicker.value);
-});
+}
 
-document.querySelectorAll('#sketch-modes > button').forEach((btn) => {
-    btn.addEventListener('click', () => {
-        if (btn.id === 'default-btn') sketchMode = 'default';
-        if (btn.id === 'rainbow-btn') sketchMode = 'rainbow';
-        if (btn.id === 'gradient-btn') sketchMode = 'gradient';
-        if (btn.id === 'eraser-btn') sketchMode = 'eraser';
-
-        displaySketchMode();
-    });
-});
-
+window.onload = resetValues();
+gridRange.addEventListener('input', displayGridSize);
+gridRange.addEventListener('change', createGrid);
+colorPicker.addEventListener('change', changeDefaultBtnColor);
 sketchDisplay.addEventListener('mousedown', (e) => {
     isSketching = true;
     e.preventDefault();
 });
-
 sketchDisplay.addEventListener('mouseup', () => (isSketching = false));
+clearBtn.addEventListener('click', createGrid);
+document.querySelectorAll('#sketch-modes > button').forEach((btn) => {
+    btn.addEventListener('click', selectSketchMode);
+});
