@@ -9,26 +9,23 @@ const clearBtn = document.querySelector('#clear-btn');
 let sketchMode = 'default';
 let isSketching = false;
 
-function setGridSize() {
-    document
-        .querySelectorAll('.sketch-display > div')
-        .forEach((e) => e.remove());
-    createGrid();
-}
-
 function createGrid() {
     const x = gridRange.value * 2;
     const y = gridRange.value;
+
+    document
+        .querySelectorAll('.sketch-display > div')
+        .forEach((e) => e.remove());
 
     for (let i = 0; i < x * y; i++) {
         const div = document.createElement('div');
 
         div.className = 'grid-cell';
+        div.addEventListener('mouseover', toggleSketch);
         sketchDisplay.appendChild(div);
     }
 
     sketchDisplay.style.gridTemplate = `repeat(${y}, 1fr) / repeat(${x}, 1fr)`;
-    toggleSketch();
 }
 
 function displayGridSize() {
@@ -48,23 +45,30 @@ function displaySketchMode() {
 }
 
 function toggleSketch() {
-    document.querySelectorAll('.grid-cell').forEach((box) => {
-        box.addEventListener('mouseover', function () {
-            if (isSketching) {
-                if (sketchMode === 'default') {
-                    this.style.background = colorPicker.value;
-                } else if (sketchMode === 'rainbow') {
-                    const r = Math.floor(Math.random() * 255);
-                    const g = Math.floor(Math.random() * 255);
-                    const b = Math.floor(Math.random() * 255);
+    if (isSketching) {
+        if (sketchMode === 'default') {
+            this.style.background = colorPicker.value;
+        } else if (sketchMode === 'rainbow') {
+            const r = Math.floor(Math.random() * 255);
+            const g = Math.floor(Math.random() * 255);
+            const b = Math.floor(Math.random() * 255);
 
-                    this.style.background = `rgb(${r}, ${g}, ${b})`;
-                } else {
-                    this.style.background = 'white';
-                }
-            }
-        });
-    });
+            this.style.background = `rgb(${r}, ${g}, ${b})`;
+        } else if (sketchMode === 'gradient') {
+            const background = this.style.background;
+            const rgb =
+                !background || background === 'white'
+                    ? [245, 245, 245]
+                    : background
+                          .slice(4, background.length - 1)
+                          .split(',')
+                          .map((n) => (Number(n) ? Number(n) - 20 : 0));
+
+            this.style.background = `rgb(${rgb})`;
+        } else {
+            this.style.background = 'white';
+        }
+    }
 }
 
 window.onload = () => {
@@ -75,7 +79,7 @@ window.onload = () => {
 };
 
 gridRange.addEventListener('input', displayGridSize);
-gridRange.addEventListener('change', setGridSize);
+gridRange.addEventListener('change', createGrid);
 
 clearBtn.addEventListener('click', () => {
     document.querySelectorAll('.grid-cell').forEach((box) => {
