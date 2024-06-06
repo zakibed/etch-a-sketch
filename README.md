@@ -1,6 +1,6 @@
 # Etch A Sketch
 
-:art: **[Live Demo](https://ikaz1.github.io/etch-a-sketch/)**
+:art: **[Live Demo](https://zakibed.github.io/etch-a-sketch/)**
 
 A virtual Etch-a-Sketch built for the web with HTML, CSS and JavaScript.
 
